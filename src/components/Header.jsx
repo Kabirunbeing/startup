@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -88,20 +89,44 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <motion.button 
-              className="text-gray-400 hover:text-white transition-all duration-200 px-4 py-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Sign In
-            </motion.button>
-            <motion.button 
-              className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-all duration-200 font-medium"
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,255,255,0.3)" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get Started
-            </motion.button>
+            <SignedOut>
+              <Link to="/sign-in">
+                <motion.button 
+                  className="text-gray-400 hover:text-white transition-all duration-200 px-4 py-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Sign In
+                </motion.button>
+              </Link>
+              <Link to="/sign-up">
+                <motion.button 
+                  className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-all duration-200 font-medium"
+                  whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,255,255,0.3)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Get Started
+                </motion.button>
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <Link to="/dashboard">
+                <motion.button 
+                  className="text-gray-400 hover:text-white transition-all duration-200 px-4 py-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Dashboard
+                </motion.button>
+              </Link>
+              <UserButton 
+                appearance={{
+                  elements: {
+                    avatarBox: 'w-8 h-8',
+                  }
+                }}
+              />
+            </SignedIn>
           </div>
 
           {/* Mobile menu button */}
@@ -167,22 +192,49 @@ const Header = () => {
                   </motion.div>
                 ))}
                 <div className="flex flex-col space-y-3 pt-4">
-                  <motion.button 
-                    className="text-gray-400 hover:text-white transition-all duration-200 text-left"
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    Sign In
-                  </motion.button>
-                  <motion.button 
-                    className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-all duration-200 font-medium"
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    Get Started
-                  </motion.button>
+                  <SignedOut>
+                    <Link to="/sign-in" onClick={() => setIsMenuOpen(false)}>
+                      <motion.button 
+                        className="text-gray-400 hover:text-white transition-all duration-200 text-left w-full"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        Sign In
+                      </motion.button>
+                    </Link>
+                    <Link to="/sign-up" onClick={() => setIsMenuOpen(false)}>
+                      <motion.button 
+                        className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-all duration-200 font-medium w-full"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                      >
+                        Get Started
+                      </motion.button>
+                    </Link>
+                  </SignedOut>
+                  <SignedIn>
+                    <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                      <motion.button 
+                        className="text-gray-400 hover:text-white transition-all duration-200 text-left w-full"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                      >
+                        Dashboard
+                      </motion.button>
+                    </Link>
+                    <div className="flex items-center justify-center pt-2">
+                      <UserButton 
+                        appearance={{
+                          elements: {
+                            avatarBox: 'w-8 h-8',
+                          }
+                        }}
+                      />
+                    </div>
+                  </SignedIn>
                 </div>
               </motion.div>
             </motion.div>

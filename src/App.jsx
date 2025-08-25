@@ -1,10 +1,14 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import Documentation from './pages/Documentation'
 import Support from './pages/Support'
+import SignInPage from './pages/SignInPage'
+import SignUpPage from './pages/SignUpPage'
+import Dashboard from './pages/Dashboard'
 
 // Page transition wrapper component
 const PageTransition = ({ children }) => {
@@ -39,19 +43,49 @@ const AnimatedRoutes = () => {
           } 
         />
         <Route 
-          path="/documentation" 
+          path="/sign-in" 
           element={
             <PageTransition>
-              <Documentation />
+              <SignInPage />
             </PageTransition>
+          } 
+        />
+        <Route 
+          path="/sign-up" 
+          element={
+            <PageTransition>
+              <SignUpPage />
+            </PageTransition>
+          } 
+        />
+        <Route 
+          path="/dashboard" 
+          element={
+            <SignedIn>
+              <PageTransition>
+                <Dashboard />
+              </PageTransition>
+            </SignedIn>
+          } 
+        />
+        <Route 
+          path="/documentation" 
+          element={
+            <SignedIn>
+              <PageTransition>
+                <Documentation />
+              </PageTransition>
+            </SignedIn>
           } 
         />
         <Route 
           path="/support" 
           element={
-            <PageTransition>
-              <Support />
-            </PageTransition>
+            <SignedIn>
+              <PageTransition>
+                <Support />
+              </PageTransition>
+            </SignedIn>
           } 
         />
       </Routes>

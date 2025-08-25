@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { SignedIn, SignedOut } from '@clerk/clerk-react'
+import { Link } from 'react-router-dom'
 
 const HeroComponent = () => {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
@@ -155,20 +157,42 @@ const HeroComponent = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <motion.button 
-                className="px-8 py-4 bg-white text-black font-medium tracking-wide rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl"
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.15)" }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Start Free Trial
-              </motion.button>
-              <motion.button 
-                className="px-8 py-4 bg-black border border-white/20 text-white font-medium tracking-wide rounded-xl hover:bg-white/5 transition-all duration-300"
-                whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.4)" }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Watch Demo
-              </motion.button>
+              <SignedOut>
+                <Link to="/sign-up">
+                  <motion.button 
+                    className="px-8 py-4 bg-white text-black font-medium tracking-wide rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl w-full sm:w-auto"
+                    whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.15)" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Start Free Trial
+                  </motion.button>
+                </Link>
+                <motion.button 
+                  className="px-8 py-4 bg-black border border-white/20 text-white font-medium tracking-wide rounded-xl hover:bg-white/5 transition-all duration-300"
+                  whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.4)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Watch Demo
+                </motion.button>
+              </SignedOut>
+              <SignedIn>
+                <Link to="/dashboard">
+                  <motion.button 
+                    className="px-8 py-4 bg-white text-black font-medium tracking-wide rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl w-full sm:w-auto"
+                    whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.15)" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Go to Dashboard
+                  </motion.button>
+                </Link>
+                <motion.button 
+                  className="px-8 py-4 bg-black border border-white/20 text-white font-medium tracking-wide rounded-xl hover:bg-white/5 transition-all duration-300"
+                  whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.4)" }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Create New Bot
+                </motion.button>
+              </SignedIn>
             </motion.div>
 
             {/* Stats */}
