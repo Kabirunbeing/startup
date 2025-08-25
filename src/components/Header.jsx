@@ -8,8 +8,9 @@ const Header = () => {
   const location = useLocation()
 
   const navItems = [
-    { name: 'Features', href: '/#features' },
-    { name: 'Pricing', href: '/#pricing' },
+    { name: 'Home', href: '/home' },
+    { name: 'Features', href: '/home#features' },
+    { name: 'Pricing', href: '/home#pricing' },
     { name: 'Documentation', href: '/documentation' },
     { name: 'Support', href: '/support' }
   ]
@@ -29,7 +30,7 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            <Link to="/" className="flex items-center space-x-3">
+            <Link to="/home" className="flex items-center space-x-3">
               <motion.div 
                 className="w-8 h-8 bg-white rounded-lg flex items-center justify-center"
                 whileHover={{ rotate: 360 }}
@@ -52,7 +53,7 @@ const Header = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
               >
-                {item.href.startsWith('/#') ? (
+                {item.href.startsWith('/home#') ? (
                   <a
                     href={item.href}
                     className="text-gray-400 hover:text-white transition-all duration-200 relative"
@@ -172,7 +173,7 @@ const Header = () => {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    {item.href.startsWith('/#') ? (
+                    {item.href.startsWith('/home#') ? (
                       <a
                         href={item.href}
                         className="text-gray-400 hover:text-white transition-all duration-200"
