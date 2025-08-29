@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+
 
 const Documentation = () => {
   const [activeTab, setActiveTab] = useState('quickstart')
@@ -28,33 +28,33 @@ const Documentation = () => {
   return (
     <div className="min-h-screen bg-black text-white pt-20">
       {/* Header */}
-      <motion.div 
+      <div 
         className="bg-gray-950 border-b border-gray-800"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <motion.h1 
+          <h1 
             className="text-4xl md:text-6xl font-bold text-white mb-6"
             {...fadeInUp}
           >
             Documentation
-          </motion.h1>
-          <motion.p 
+          </h1>
+          <p 
             className="text-xl text-gray-400 max-w-2xl"
             {...fadeInUp}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Everything you need to build powerful WhatsApp bots with our platform
-          </motion.p>
+          </p>
         </div>
-      </motion.div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
-          <motion.div 
+          <div 
             className="lg:col-span-1"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -63,7 +63,7 @@ const Documentation = () => {
             <div className="sticky top-24">
               <nav className="space-y-2">
                 {tabs.map((tab) => (
-                  <motion.button
+                  <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 ${
@@ -78,21 +78,21 @@ const Documentation = () => {
                       <span className="text-lg">{tab.icon}</span>
                       <span className="font-medium">{tab.label}</span>
                     </div>
-                  </motion.button>
+                  </button>
                 ))}
               </nav>
             </div>
-          </motion.div>
+          </div>
 
           {/* Content */}
-          <motion.div 
+          <div 
             className="lg:col-span-3"
             variants={staggerContainer}
             initial="initial"
             animate="animate"
           >
             {activeTab === 'quickstart' && (
-              <motion.div variants={fadeInUp} className="space-y-8">
+              <div variants={fadeInUp} className="space-y-8">
                 <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8">
                   <h2 className="text-2xl font-bold text-white mb-4">Quick Start Guide</h2>
                   <p className="text-gray-400 mb-6">Get your first WhatsApp bot running in under 5 minutes.</p>
@@ -123,11 +123,11 @@ const Documentation = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
 
             {activeTab === 'api' && (
-              <motion.div variants={fadeInUp} className="space-y-8">
+              <div variants={fadeInUp} className="space-y-8">
                 <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8">
                   <h2 className="text-2xl font-bold text-white mb-4">API Reference</h2>
                   <p className="text-gray-400 mb-6">Complete API documentation for WhatsBot Pro.</p>
@@ -152,9 +152,9 @@ const Documentation = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
