@@ -152,7 +152,7 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden overflow-hidden transition-all duration-200 ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className={`md:hidden overflow-hidden transition-all duration-200 ${isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
           <div className="py-4 border-t border-gray-800/50">
             <div className="flex flex-col space-y-4">
               {navItems.map((item, index) => (
